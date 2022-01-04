@@ -24,11 +24,15 @@ class MainScene extends SceneEventListener {
         self.poolBullet = null;
         self.particleFire = null;
         self.totalEnemyEscaped = 0;
+        self.soundShoot = null;
+        self.audioListener = null;
+        self.score = 0;
 
         self.init();
         self.addLights();
         self.register(GameEvent.PlayerShoot);
         self.register(GameEvent.EnemyEscape);
+        self.register(GameEvent.GainScore);
         self.notify(CoreEvent.GameStart);
     }
 
@@ -76,11 +80,19 @@ class MainScene extends SceneEventListener {
             info: GameConfig.ParticleBullet,
             texture: assetsProvider.GetTexture(GameConfig.Fire).map
         });
+
+        self.audioListener = new THREE.AudioListener();
+        self.camera.add( self.audioListener );
+        self.soundShoot = new THREE.Audio( self.audioListener );
+        self.soundShoot.setBuffer( assetsProvider.GetSound(GameConfig.AudioShoot));
+        self.soundShoot.setVolume(0.5);
     }
 
     onPlayerShoot() {
         var self = this;
+        self.soundShoot.isPlaying = false;
         self.particleFire.AddParticles(this.player.GetSpawnBulletPosition());
+        self.soundShoot.play();
     }
 
     onEnemyEscape() {
@@ -89,7 +101,15 @@ class MainScene extends SceneEventListener {
         if (self.totalEnemyEscaped >= GameConfig.LoseEscapeNumber) {
             self.notify(CoreEvent.GameOver);
             self.notify(CoreEvent.LoadScene, SceneName.EndScene);
+        } else {
+            self.notify(GameEvent.UpdateLife, GameConfig.LoseEscapeNumber - self.totalEnemyEscaped)
         }
+    }
+
+    onGainScore(score) {
+        var self = this;
+        self.score += score;
+        self.notify(GameEvent.UpdateScore, self.score);
     }
 
     Update(dt) {

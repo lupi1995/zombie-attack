@@ -29,6 +29,7 @@ class App extends EventListener {
         self.renderer.outputEncoding = THREE.sRGBEncoding;
         self.renderer.setSize(width, height);
         document.body.appendChild(self.renderer.domElement);
+        self.forceHideCursor = false;
 
         self.sceneManager = new SceneManager();
         self.register(CoreEvent.CreateScene);
@@ -83,15 +84,17 @@ class App extends EventListener {
         var self = this;
         document.body.style.cursor = "auto";
         self.pause = true;
+        self.forceHideCursor = false;
     }
 
     onGameStart() {
         var self = this;
         self.pause = false;
         document.body.style.cursor = "none";
+        self.forceHideCursor = true;
     }
 
-    onLoadScene(sceneName){
+    onLoadScene(sceneName) {
         var self = this;
         self.sceneManager.LoadScene(sceneName);
     }
@@ -107,11 +110,13 @@ class App extends EventListener {
         self.then = performance.now();
         self.frameCount = 0;
         self.isLostFocus = false;
+        self.forceHideCursor && (document.body.style.cursor = "none");
     }
 
     onLostFocus() {
         var self = this;
         self.isLostFocus = true;
+        self.forceHideCursor &&  (document.body.style.cursor = "auto");
     }
 
     StartAnimating() {
@@ -125,8 +130,8 @@ class App extends EventListener {
 
     update() {
         var self = this;
-        if (self.isLostFocus || self.pause) return;
         requestAnimationFrame(self.update.bind(self));
+        if (self.isLostFocus || self.pause) return;
         var now = performance.now();
         self.elapsed = now - self.then;
         var sinceStart = now - self.startTime;

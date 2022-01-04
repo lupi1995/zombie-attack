@@ -4,6 +4,7 @@ import ObjectEventListener from "../../../core/design-pattern/observer/object-ev
 import GameConfig from "../../settings/game-config";
 import { AnimationUtils } from "three";
 import { LoopRepeat, LoopOnce } from "three/src/constants";
+import GameEvent from "../../events/game-event";
 
 class Enemy extends ObjectEventListener {
     constructor() {
@@ -51,6 +52,7 @@ class Enemy extends ObjectEventListener {
 
     OnCollisionEnter() {
         var self = this;
+        if (!self.visible && !self.canCollide) return;
         self.animation.stop();
         self.animation = self.mixer.clipAction(self.dieClip);
         self.animation.setLoop(LoopOnce, 1);
@@ -58,6 +60,8 @@ class Enemy extends ObjectEventListener {
         self.animation.play();
         self.velocity.set(0, 0, 0);
         self.canCollide = false;
+        self.notify(GameEvent.GainScore, GameConfig.ScorePerEnemy);
+
         setTimeout(() => {
             self.Reset();
             self.EnemyDied(self);

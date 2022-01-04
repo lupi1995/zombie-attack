@@ -25,6 +25,7 @@ class Bullet extends THREE.Object3D {
 
     OnCollisionEnter() {
         var self = this;
+        if (!self.visible && !self.canCollide) return;
         self.canCollide = false;
         self.DestroyBullet(self);
     }

@@ -3,6 +3,7 @@ import Pool from "../../../core/utils/pool";
 import Enemy from "./enemy";
 import * as THREE from "three";
 import GameEvent from "../../events/game-event";
+import GameConfig from "../../settings/game-config";
 
 class EnemySpawner extends ObjectEventListener {
     constructor(spawnPositions) {
@@ -35,7 +36,7 @@ class EnemySpawner extends ObjectEventListener {
         }
     }
 
-    EnemyEscape(){
+    EnemyEscape() {
         var self = this;
         self.notify(GameEvent.EnemyEscape);
         self.DestroyEnemy();

@@ -10,6 +10,7 @@ var GameConfig = {
     ZombieModel: "Zombie_Homeless_04",
     Sight: "sight",
     Fire: "fire",
+    AudioShoot: "gun-shot",
     ParticleBullet: {
         Size: 0.1,
         Alpha: 1,
@@ -25,8 +26,10 @@ var GameConfig = {
     ZombieModel: "Zombie_Homeless_04",
     Sight: "sight",
     ZombieAnimationState: "Bip001|Take 001|BaseLayer",
+    BackgroundURL:"./assets/textures/background.jpg",
     PlayerPositionX: 70,
-    LoseEscapeNumber: 1
+    LoseEscapeNumber: 50,
+    ScorePerEnemy: 5,
 }
 
 export default GameConfig;

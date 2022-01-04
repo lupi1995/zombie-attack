@@ -5,7 +5,7 @@ class Scene extends THREE.Scene {
     constructor() {
         super();
         var self = this;
-        new THREE.PerspectiveCamera(50, global.innerWidth / global.innerHeight, 0.1, 1000);
+        self.camera = new THREE.PerspectiveCamera(50, global.innerWidth / global.innerHeight, 0.1, 1000);
         self.background = new THREE.Color(0xAAAAAA);
     }
 

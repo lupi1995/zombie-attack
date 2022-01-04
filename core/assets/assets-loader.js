@@ -2,7 +2,7 @@ import AssetsConfig from "./assets-config";
 import AssetsType from "./assets-type";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import assetsProvidder from "./assets-provider";
-import { ObjectLoader, TextureLoader, SpriteMaterial } from "three";
+import { ObjectLoader, TextureLoader, SpriteMaterial, AudioLoader } from "three";
 import TextureAtlas from "./texture-atlas";
 import * as THREE from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/dracoloader";
@@ -17,12 +17,13 @@ class AssetsLoader {
         self.modelLoader.setDRACOLoader(dracoLoader)
         self.objectLoader = new ObjectLoader();
         self.textureLoader = new TextureLoader();
+        self.audioLoader = new AudioLoader();
         self.OnLoadComplete = () => { };
     }
 
     LoadAssets(sceneName, onLoadComplete) {
         var self = this;
-        if (!AssetsConfig[sceneName]) {
+        if (!AssetsConfig[sceneName] || AssetsConfig[sceneName].length == 0) {
             onLoadComplete();
             return;
         }
@@ -37,7 +38,7 @@ class AssetsLoader {
                     self.LoadTexture(asset);
                     break;
                 case AssetsType.Sound:
-
+                    self.LoadAudio(asset);
                     break;
                 case AssetsType.TPS:
                     self.LoadTPS(asset);
@@ -113,6 +114,22 @@ class AssetsLoader {
                 self.OnLoadComplete();
             }
         });
+    }
+
+    LoadAudio(asset) {
+        var self = this;
+        self.audioLoader.load(asset.path, (audio) => {
+            assetsProvidder.AddSound(asset.name, audio);
+            if (--self.totalFile == 0) {
+                self.OnLoadComplete();
+            }
+        }, () => { }, (error) => {
+            console.error(error);
+            if (--self.totalFile == 0) {
+                self.OnLoadComplete();
+            }
+        });
+
     }
 }
 export default AssetsLoader;
