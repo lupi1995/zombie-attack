@@ -1,7 +1,10 @@
 NOTE: GAME RUN ON NODEJS ENVIRONMENT
 build version at folder: /dist
 
---- how to run----
+--- PRODUCT FILE ---
+click to run: ./product/index.html
+
+--- HOW TO RUN PROJECT ----
 
 open cmd and type:
 
