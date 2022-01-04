@@ -1,4 +1,6 @@
-build version at: dist folder
+NOTE: GAME RUN ON NODEJS ENVIRONMENT
+build version at folder: /dist
+
 --- how to run----
 
 open cmd and type:
