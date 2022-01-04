@@ -58,13 +58,17 @@ class Observer {
         var self = this;
 
         var listeners = self.nodes[event] || [];
-        listeners.Remove(source);
+        listeners.forEach(listener => {
+            if (listener.source == source) {
+                listeners.Remove(listener);
+            }
+        });
     }
 
     UnregisterAll(source) {
         var self = this;
         Object.keys(self.nodes).forEach(key => {
-            self.nodes[key].Remove(source)
+            self.Unregister(key, source);
         });
     }
 }

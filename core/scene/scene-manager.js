@@ -15,8 +15,9 @@ class SceneManager extends EventListener {
     createScene(Template) {
         var self = this;
         var scene = new Template();
-        self.prevScene && self.prevScene.SetVisible(false);
         self.prevScene = self.currentScene;
+        self.prevScene && self.prevScene.Destroy(false);
+        self.prevScene = null;
         self.currentScene = scene;
         self.currentScene.SetVisible(true);
         self.notify(CoreEvent.CreateScene, { scene: self.currentScene });

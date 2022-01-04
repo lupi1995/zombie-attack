@@ -29,11 +29,11 @@ class EndScenePanel extends EventListener {
 
         self.scorePanel = document.createElement("div");
         self.scorePanel.style.position = "fixed";
-        self.scorePanel.style.width = "500px";
+        self.scorePanel.style.width = "800px";
         self.scorePanel.style.height = "200px";
-        self.scorePanel.style.fontSize = "50px";
+        self.scorePanel.style.fontSize = "70px";
         self.scorePanel.style.color = "red";
-        self.scorePanel.style.left = GameConfig.GameWidth / 2 - 250 + "px";
+        self.scorePanel.style.left = GameConfig.GameWidth / 2 - 400 + "px";
         self.scorePanel.style.top = "50px";
         self.scorePanel.textContent = "YOUR SCORE: 0";
         self.scorePanel.style.fontFamily = "fantasy";
@@ -45,7 +45,7 @@ class EndScenePanel extends EventListener {
         self.replayButton.style.width = "200px";
         self.replayButton.style.height = "70px";
         self.replayButton.style.position = "fixed";
-        self.replayButton.style.top = "300px";
+        self.replayButton.style.top = "500px";
         self.replayButton.style.left = GameConfig.GameWidth / 2 - 100 + "px";
         self.replayButton.style.color = "red";
         self.replayButton.style.fontFamily = "fantasy";

@@ -10,6 +10,8 @@ class Enemy extends ObjectEventListener {
     constructor() {
         super();
         var self = this;
+
+        self.escaped = false;
         self.PlayerAttacked = (enemy) => { };
         self.display = assetsProvider.GetModel(GameConfig.ZombieModel);
         self.display.rotation.y = Math.PI / 2;
@@ -22,6 +24,11 @@ class Enemy extends ObjectEventListener {
         global.b = self.display.animations[0].clone();
         self.createGhostMesh();
         self.EnemyEscape = () => { };
+        self.audioListener = new THREE.AudioListener();
+        self.add(self.audioListener);
+        self.soundShoot = new THREE.Audio(self.audioListener);
+        self.soundShoot.setBuffer(assetsProvider.GetSound(GameConfig.AudioZombieDie));
+        self.soundShoot.setVolume(0.5);
     }
 
     start() {
@@ -30,6 +37,7 @@ class Enemy extends ObjectEventListener {
         self.animation.setLoop(LoopRepeat, Infinity);
         self.animation.play();
         self.canCollide = true;
+        self.escaped = false;
     }
 
     createGhostMesh() {
@@ -43,9 +51,12 @@ class Enemy extends ObjectEventListener {
 
     Update(dt) {
         var self = this;
+        if (self.escaped) return;
+
         self.mixer.update(dt);
         self.position.add(self.velocity.clone().multiplyScalar(dt));
         if (self.position.x >= GameConfig.PlayerPositionX) {
+            self.escaped = true;
             self.EnemyEscape(self);
         }
     }
@@ -61,7 +72,7 @@ class Enemy extends ObjectEventListener {
         self.velocity.set(0, 0, 0);
         self.canCollide = false;
         self.notify(GameEvent.GainScore, GameConfig.ScorePerEnemy);
-
+        self.soundShoot.play();
         setTimeout(() => {
             self.Reset();
             self.EnemyDied(self);

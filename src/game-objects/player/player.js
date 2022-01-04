@@ -2,7 +2,9 @@ import assetsProvider from "../../../core/assets/assets-provider";
 import ObjectEventListener from "../../../core/design-pattern/observer/object-event-listener";
 import GameConfig from "../../settings/game-config";
 import GameEvent from "../../events/game-event";
-import { Object3D } from "three";
+import { Object3D, AnimationMixer } from "three";
+import { LoopRepeat, LoopOnce } from "three/src/constants";
+
 class Player extends ObjectEventListener {
     constructor() {
         super();
@@ -17,10 +19,27 @@ class Player extends ObjectEventListener {
         self.spawnTarget.position.set(0, 0.12, 0.7);
         self.spawnTarget.visible = false;
         self.add(self.spawnTarget);
+        self.mixer = new AnimationMixer(self.hand);
+        self.handClip = self.hand.animations[0];
+        self.animation = self.mixer.clipAction(self.handClip);
+        self.animation.setLoop(LoopOnce, 1);
 
-        global.addEventListener("mousedown", self.startShooting.bind(self));
-        global.addEventListener("mouseup", self.stopShooting.bind(self));
+        self.bindingMouseDown = self.startShooting.bind(self);
+        self.bindingMouseUp = self.stopShooting.bind(self);
+        global.addEventListener("mousedown", self.bindingMouseDown);
+        global.addEventListener("mouseup", self.bindingMouseUp);
+    }
 
+    Update(dt) {
+        var self = this;
+        self.mixer.update(dt);
+    }
+
+    Reset() {
+        var self = this;
+        clearTimeout(self.shootingTimeOut);
+        global.removeEventListener("mousedown", self.bindingMouseDown);
+        global.removeEventListener("mouseup", self.bindingMouseUp);
     }
 
     stopShooting() {
@@ -41,6 +60,12 @@ class Player extends ObjectEventListener {
     startShooting() {
         var self = this;
         self.notify(GameEvent.PlayerShoot);
+        self.animation.stop();
+        self.animation.play();
+        self.gun.position.set(-0.002, 0.002, 0);
+        setTimeout(() => {
+            self.gun.position.set(0, 0, 0);
+        }, 50);
         self.shootingTimeOut = setTimeout(() => {
             self.startShooting();
         }, 100);

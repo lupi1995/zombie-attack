@@ -10,6 +10,6 @@ new Enum(GameEvent, [
     "GainScore",
     "Replay",
     "Play",
-    "EnterLoadingScene"
+    "EnterLoadingScene",
 ]);
 export default GameEvent;

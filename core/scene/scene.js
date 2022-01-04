@@ -13,5 +13,10 @@ class Scene extends THREE.Scene {
         var self = this;
         self.visible = visible;
     }
+
+    Destroy() {
+        var self = this;
+        self.SetVisible(false);
+    }
 }
 export default Scene;

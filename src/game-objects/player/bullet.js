@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import assetsProvider from "../../../core/assets/assets-provider";
+import GameConfig from "../../settings/game-config";
 
 class Bullet extends THREE.Object3D {
     constructor() {
@@ -11,6 +13,12 @@ class Bullet extends THREE.Object3D {
         self.add(self.display);
         self.velocity = new THREE.Vector3();
         self.DestroyBullet = () => { };
+
+        self.audioListener = new THREE.AudioListener();
+        self.add(self.audioListener);
+        self.soundShoot = new THREE.Audio(self.audioListener);
+        self.soundShoot.setBuffer(assetsProvider.GetSound(GameConfig.AudioBulletImpact));
+        self.soundShoot.setVolume(0.5);
     }
 
     Update(dt) {
@@ -27,6 +35,7 @@ class Bullet extends THREE.Object3D {
         var self = this;
         if (!self.visible && !self.canCollide) return;
         self.canCollide = false;
+        self.soundShoot.play();
         self.DestroyBullet(self);
     }
 }

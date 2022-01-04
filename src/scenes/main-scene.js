@@ -82,10 +82,28 @@ class MainScene extends SceneEventListener {
         });
 
         self.audioListener = new THREE.AudioListener();
-        self.camera.add( self.audioListener );
-        self.soundShoot = new THREE.Audio( self.audioListener );
-        self.soundShoot.setBuffer( assetsProvider.GetSound(GameConfig.AudioShoot));
+        self.player.add(self.audioListener);
+        self.soundShoot = new THREE.Audio(self.audioListener);
+        self.soundShoot.setBuffer(assetsProvider.GetSound(GameConfig.AudioShoot));
         self.soundShoot.setVolume(0.5);
+
+        self.backgroundMusic = new THREE.Audio(self.audioListener);
+        self.backgroundMusic.setBuffer(assetsProvider.GetSound(GameConfig.AudioBackground));
+        self.backgroundMusic.setVolume(0.5);
+        self.backgroundMusic.setLoop(true);
+        self.backgroundMusic.play();
+    }
+
+    Destroy() {
+        super.Destroy();
+        var self = this;
+        self.onDestroy();
+        self.player.Reset();
+        self.totalEnemyEscaped = 0;
+        self.backgroundMusic.stop();
+        self.remove(self.enemySpawner);
+        self.remove(self.bulletSpawner);
+        self.remove(self.player);
     }
 
     onPlayerShoot() {

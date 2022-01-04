@@ -28,7 +28,7 @@ class MainScenePanel extends EventListener {
         self.totalEscapedPanel.style.fontSize = "50px";
         self.totalEscapedPanel.style.color = "red";
         self.totalEscapedPanel.style.left = "100px";
-        self.totalEscapedPanel.style.top = "50px";
+        self.totalEscapedPanel.style.top = "0px";
         self.totalEscapedPanel.textContent = "LIFE: 50";
         self.totalEscapedPanel.style.fontFamily = "fantasy";
         self.totalEscapedPanel.style.userSelect = "none";
@@ -42,7 +42,7 @@ class MainScenePanel extends EventListener {
         self.scorePanel.style.fontSize = "50px";
         self.scorePanel.style.color = "red";
         self.scorePanel.style.left = global.innerWidth / 2 - 150 + "px";
-        self.scorePanel.style.top = "50px";
+        self.scorePanel.style.top = "0px";
         self.scorePanel.textContent = "SCORE: 50";
         self.scorePanel.style.fontFamily = "fantasy";
         self.scorePanel.style.userSelect = "none";

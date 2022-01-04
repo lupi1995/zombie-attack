@@ -11,6 +11,9 @@ var GameConfig = {
     Sight: "sight",
     Fire: "fire",
     AudioShoot: "gun-shot",
+    AudioBackground: "background-music",
+    AudioBulletImpact: "bullet-impact",
+    AudioZombieDie: "zombie-die",
     ParticleBullet: {
         Size: 0.1,
         Alpha: 1,
@@ -26,6 +29,7 @@ var GameConfig = {
     ZombieModel: "Zombie_Homeless_04",
     Sight: "sight",
     ZombieAnimationState: "Bip001|Take 001|BaseLayer",
+    HandAnimationState: "CP_Hand_Mesh|Take 001|BaseLayer.007",
     PlayerPositionX: 70,
     LoseEscapeNumber: 50,
     ScorePerEnemy: 5,

@@ -66,7 +66,6 @@ class App extends EventListener {
             self.transformControls = new TransformControls(self.scene.camera, self.renderer.domElement);
             self.controls.enabled = false;
             self.scene.add(self.transformControls);
-            self.transformControls.attach(self.scene.enemySpawner.test);
             self.scene.add(new THREE.AxesHelper(500));
 
         }

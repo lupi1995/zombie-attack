@@ -3,6 +3,7 @@ import CoreEvent from "../../core/evens/core-event";
 import SceneName from "../settings/scene-name";
 import GameEvent from "../events/game-event";
 import MenuScenePanel from "../html-ui/menu-scene-panel";
+import LoadingScenePanel from "../html-ui/loading-scene-panel";
 
 class MenuScene extends SceneEventListener {
     constructor() {
@@ -10,6 +11,7 @@ class MenuScene extends SceneEventListener {
         var self = this;
         self.register(GameEvent.Play);
         new MenuScenePanel();
+        new LoadingScenePanel();
         document.body.style.cursor = "auto";
     }
 
