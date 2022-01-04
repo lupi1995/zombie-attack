@@ -26,10 +26,8 @@ var GameConfig = {
     ZombieModel: "Zombie_Homeless_04",
     Sight: "sight",
     ZombieAnimationState: "Bip001|Take 001|BaseLayer",
-    BackgroundURL:"./assets/textures/background.jpg",
     PlayerPositionX: 70,
     LoseEscapeNumber: 50,
     ScorePerEnemy: 5,
 }
-
 export default GameConfig;

@@ -8,7 +8,7 @@ import MenuScene from "./scenes/menu-scene";
 import LoadingScene from "./scenes/loading-scene";
 
 global.DEBUG=false;
-global.PACK_TO_HTML5=true;
+
 class ExtendApp extends App {
     constructor(width, height) {
         super(width, height);

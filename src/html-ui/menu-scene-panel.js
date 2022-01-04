@@ -1,6 +1,7 @@
 import EventListener from "../../core/design-pattern/observer/event-listener";
 import CoreEvent from "../../core/evens/core-event";
 import GameEvent from "../events/game-event";
+import AssetsConfig from "../settings/extend-assets-config";
 import GameConfig from "../settings/game-config";
 
 
@@ -20,7 +21,7 @@ class MenuScenePanel extends EventListener {
         self.background = new Image();
         self.background.style.width = GameConfig.GameWidth + "px";
         self.background.style.height = GameConfig.GameHeight + "px";
-        self.background.src = GameConfig.BackgroundURL;
+        self.background.src = AssetsConfig.BackgroundURL;
         self.container.appendChild(self.background);
 
         self.playButton = document.createElement("button");
