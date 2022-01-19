@@ -6,7 +6,8 @@ new Enum(CoreEvent, [
     "PauseGame",
     "GameOver",
     "GameStart",
-    "LoadScene"
+    "LoadScene",
+    "Resize"
 ]);
 
 export default CoreEvent;

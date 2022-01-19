@@ -6,7 +6,7 @@ class Pool {
         self.usings = [];
 
         for (let index = 0; index < size; index++) {
-            self.availabels.push(new T);
+            self.availabels.push(new T());
         }
     }
 

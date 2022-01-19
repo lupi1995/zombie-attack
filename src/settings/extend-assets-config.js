@@ -13,9 +13,7 @@ import TextureBackground from "./assets-base64/texture-background";
 import AudioBackground from "./assets-base64/audio-background";
 import AudioBulletImpact from "./assets-base64/audio-bullet-impact";
 import AudioZombieDie from "./assets-base64/audio-zombie-die";
-
-var USING_EMBEDDED_ASSETS = true; // set false to use load folder assets instead
-
+global.USING_EMBEDDED_ASSETS = true;
 AssetsConfig.BackgroundURL = "./assets/textures/background.jpg"
 AssetsConfig[SceneName.MainScene] = [
     { name: "ChinaTown_01", type: AssetsType.Model, path: "./assets/models/ChinaTown_01.glb" },
@@ -26,11 +24,14 @@ AssetsConfig[SceneName.MainScene] = [
     { name: "fire", type: AssetsType.Texture, path: "./assets/textures/fire.png" },
     { name: "gun-shot", type: AssetsType.Sound, path: "./assets/sounds/gun-shot.mp3" },
     { name: "bullet-impact", type: AssetsType.Sound, path: "./assets/sounds/bullet-impact.mp3" },
-    { name: "zombie-die", type: AssetsType.Sound, path: "./assets/sounds/die-zombie.mp3" },
+    { name: "zombie-die", type: AssetsType.Sound, path: "./assets/sounds/zombie-die.mp3" },
     { name: "background-music", type: AssetsType.Sound, path: "./assets/sounds/background-music.mp3" }
 ]
-if (USING_EMBEDDED_ASSETS) {
+if (global.USING_EMBEDDED_ASSETS) {
     AssetsConfig.BackgroundURL = TextureBackground;
+    AssetsConfig[SceneName.MenuScene] = [
+        { name: "background", type: AssetsType.Texture, path: TextureBackground }
+    ]
     AssetsConfig[SceneName.MainScene] = [
         { name: "ChinaTown_01", type: AssetsType.Model, path: TownModel },
         { name: "Gun_M249_02", type: AssetsType.Model, path: GunModel },

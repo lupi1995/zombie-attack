@@ -1,4 +1,6 @@
-import App from "./extend-app";
-import GameConfig from "./settings/game-config";
+import App from "app";
+import GameConfig from "game-config";
+import "../webpack-settings/auto-import";  
+
 const app = new App(GameConfig.GameWidth, GameConfig.GameHeight)
 app.StartAnimating()

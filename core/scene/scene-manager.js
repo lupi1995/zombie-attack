@@ -28,11 +28,10 @@ class SceneManager extends EventListener {
         self.templates[sceneName] = template;
     }
 
-    LoadScene(sceneName) {
+    async LoadScene(sceneName) {
         var self = this;
-        self.assetsLoader.LoadAssets(sceneName, () => {
-            self.LoadSceneComplete(sceneName);
-        });
+        await self.assetsLoader.LoadAssets(sceneName);
+        self.LoadSceneComplete(sceneName);
     }
 
     LoadSceneComplete(sceneName) {

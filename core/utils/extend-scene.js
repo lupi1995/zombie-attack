@@ -11,4 +11,5 @@ Scene.prototype.UpdateChildren = function (deltaTime) {
         child.UpdateChildren && child.UpdateChildren(deltaTime);
     });
 }
+
 export default Scene;

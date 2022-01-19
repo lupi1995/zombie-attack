@@ -6,22 +6,14 @@ import ExtendAssetsConfig from "./settings/extend-assets-config";
 import EndScene from "./scenes/end-scene";
 import MenuScene from "./scenes/menu-scene";
 import LoadingScene from "./scenes/loading-scene";
+global.DEBUG = false;
 
-global.DEBUG=false;
-
-class ExtendApp extends App {
-    constructor(width, height) {
-        super(width, height);
-        var self = this;
-    }
-
-    addScenes() {
-        var self = this;
-        self.sceneManager.AddScene(MenuScene, SceneName.MenuScene);
-        self.sceneManager.AddScene(LoadingScene, SceneName.LoadingScene);
-        self.sceneManager.AddScene(MainScene, SceneName.MainScene);
-        self.sceneManager.AddScene(EndScene, SceneName.EndScene);
-        self.sceneManager.LoadScene(SceneName.MenuScene);
-    }
+App.prototype.addScenes = function(){
+    var self = this;
+    self.sceneManager.AddScene(MenuScene, SceneName.MenuScene);
+    self.sceneManager.AddScene(LoadingScene, SceneName.LoadingScene);
+    self.sceneManager.AddScene(MainScene, SceneName.MainScene);
+    self.sceneManager.AddScene(EndScene, SceneName.EndScene);
+    self.sceneManager.LoadScene(SceneName.MenuScene);
 }
-export default ExtendApp;
+export default App;
