@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "editor":"webpack --mode editor --config webpack.config.editor.js",
         "prod": "webpack --mode production --config webpack.config.prod.js",
         "dev": "webpack --mode development --config webpack.config.dev.js",
         "start": "webpack-dev-server  --progress --config webpack.config.dev.js",

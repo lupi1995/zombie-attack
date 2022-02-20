@@ -16,7 +16,7 @@ class Observer {
         }
         self.isNotifying = true;
 
-        var listeners = self.nodes[event];
+        var listeners = self.nodes[event] || [];
         listeners.forEach(listener => {
             listener.source[listener.onEvent](data, source)
         });
